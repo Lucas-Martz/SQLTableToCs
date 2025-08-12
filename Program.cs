@@ -251,7 +251,7 @@ WHERE s1.name = @schema AND t1.name = @table;";
                 if (identityCols.Contains(c.Name)) continue;
                 string camel = c.Name;
                 string fieldName = "var" + camel;
-                sb.AppendLine("        this." + fieldName + " = " + camel + ";");
+                sb.AppendLine("        this." + fieldName + " = " + ToCamel(camel) + ";");
             }
             sb.AppendLine("    }");
             sb.AppendLine();
@@ -262,7 +262,7 @@ WHERE s1.name = @schema AND t1.name = @table;";
         {
             string propName = ToPascal(c.Name);
             string csType = MapSqlToCSharp(c.SqlType, c.IsNullable);
-            string field = "_" + ToCamel(c.Name);
+            string field = "var" + c.Name;
 
             // Atributos
             // Column
